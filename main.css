@@ -1,0 +1,78 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  margin: 0;
+  background-color: rgb(187, 45, 69);
+}
+
+.explanation {
+  text-align: center;
+}
+
+.h1 {
+  font-size: 30px;
+}
+
+.instructions {
+  font-size: 18px;
+  border: 3px solid black;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.grid {
+  display: flex;
+  flex-direction: row;
+  border: 10px solid black;
+  border-radius: 15px;
+  width: 620px;
+  height: 620px;
+  flex-wrap: wrap;
+}
+
+.cell {
+  width: 3.125%;
+  height: 3.125%;
+  background-color: rgb(92, 8, 117);
+}
+
+.pacman-looking-right {
+  background-image: url(images/pacman-gif-right.gif);
+  background-size: cover;
+}
+
+.pacman-looking-left {
+  background-image: url(images/pacman-gif-leftgif.gif);
+  background-size: cover;
+}
+
+.pacman-looking-up {
+  background-image: url(images/pacman-gif-up.gif);
+  background-size: cover;
+}
+
+.pacman-looking-down {
+  background-image: url(images/pacman-gif-down.gif);
+  background-size: cover;
+}
+
+.wall {
+  background-color: violet;
+  border: 2px solid black;
+}
+
+.vegetable {
+  background-image: url(images/evil-broccoli.png);
+  background-size: cover;
+}
+
+.vege1terri {
+  background-color: burlywood;
+}
