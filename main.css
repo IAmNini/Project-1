@@ -41,6 +41,7 @@ body {
   width: 3.125%;
   height: 3.125%;
   background-color: rgb(92, 8, 117);
+  font-size: 9px;
 }
 
 .pacman-looking-right {
