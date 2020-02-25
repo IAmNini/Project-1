@@ -1,4 +1,7 @@
 function main() {
+
+  // VARIABLES AND ARRAYS 
+
   const côté = 32
   const gridCellCount = côté * côté
   const grid = document.querySelector('.grid')
@@ -23,11 +26,14 @@ function main() {
   const vegetable7Territory = [673, 674, 675, 676, 677, 678, 705, 710, 711, 712, 713, 714, 737, 742, 769, 774, 801, 806, 833, 834, 835, 836, 837, 838, 839, 840, 841, 842, 865, 870, 897, 902, 929, 934, 961, 962, 963, 964, 965, 966, 967, 968, 969, 970]
   const vegetable8Territory = [715, 716, 723, 724, 748, 750, 751, 752, 753, 755, 780, 782, 785, 787, 812, 814, 817, 819, 843, 844, 846, 849, 851, 852, 876, 878, 881, 883, 908, 909, 910, 911, 912, 913, 914, 915, 940, 947, 971, 972, 979, 980]
   const vegetable9Territory = [697, 698, 699, 700, 701, 702, 725, 726, 727, 728, 729, 734, 761, 766, 793, 798, 825, 830, 853, 854, 855, 856, 857, 858, 859, 860, 861, 862, 889, 894, 921, 926, 953, 958, 981, 982, 983, 984, 985, 986, 987, 988, 989, 990]
+  const arrayOfDirections = ['right', 'left', 'up', 'down']
 
+  // INITIAL SET UP LOOP
+  
   for (let i = 0; i < gridCellCount; i++) {
     const cell = document.createElement('div')
     cell.classList.add('cell')
-    cell.innerHTML = i
+    // cell.innerHTML = i
     if (i === pacmanPosition) {
       cell.classList.add('pacman-looking-right')
     }
@@ -38,11 +44,15 @@ function main() {
     cells.push(cell)
   }
 
+  // WALL CLASS LOOP
+
   for (let i = 0; i < wallPosition.length; i++) {
     cells[wallPosition[i]].classList.add('wall')
   }
 
+  // TERRITORY CLASSES LOOPS
   // won't actually be colored, just need to see it right now
+
   for (let i = 0; i < vegetable1Territory.length; i++) {
     cells[vegetable1Territory[i]].classList.add('vege1terri')
   }
@@ -79,7 +89,7 @@ function main() {
     cells[vegetable9Territory[i]].classList.add('vege9terri')
   }
 
-
+  // PAC-MAN MOVES 
 
   document.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowRight') {
@@ -145,6 +155,8 @@ function main() {
     }
   })
 
+  // CELLS IN TERRITORY LOOPS
+
   const cellsInTerritory1 = []
   for (let i = 0; i < cells.length; i++) {
     if (cells[i].classList.contains('vege1terri')) {
@@ -208,9 +220,7 @@ function main() {
     }
   }
 
-  const arrayOfDirections = ['right', 'left', 'up', 'down']
-
-  // BEGINNING OF FUNCTIONS FOR VEGGIE 1
+  // FUNCTIONS FOR VEGGIE 1
 
   function veggie1GoesRandom() {
     const randomInterval1 = setInterval(() => {
@@ -295,7 +305,7 @@ function main() {
     }, 300)
   }
 
-  // BEGINNING OF FUNCTIONS FOR VEGGIE 2
+  // FUNCTIONS FOR VEGGIE 2
 
   function veggie2GoesRandom() {
     const randomInterval2 = setInterval(() => {
@@ -380,7 +390,7 @@ function main() {
     }, 300)
   }
 
-  // BEGINNING OF FUNCTIONS FOR VEGGIE 3
+  // FUNCTIONS FOR VEGGIE 3
 
   function veggie3GoesRandom() {
     const randomInterval3 = setInterval(() => {
@@ -465,7 +475,7 @@ function main() {
     }, 300)
   }
 
-  // BEGINNING OF FUNCTIONS FOR VEGGIE 4
+  // FUNCTIONS FOR VEGGIE 4
 
   function veggie4GoesRandom() {
     const randomInterval4 = setInterval(() => {
@@ -550,7 +560,7 @@ function main() {
     }, 300)
   }
 
-  // BEGINNING OF FUNCTIONS FOR VEGGIE 5
+  // FUNCTIONS FOR VEGGIE 5
 
   function veggie5GoesRandom() {
     const randomInterval5 = setInterval(() => {
@@ -635,7 +645,7 @@ function main() {
     }, 300)
   }
 
-  // BEGINNING OF FUNCTIONS FOR VEGGIE 6
+  // FUNCTIONS FOR VEGGIE 6
 
   function veggie6GoesRandom() {
     const randomInterval6 = setInterval(() => {
@@ -720,7 +730,7 @@ function main() {
     }, 300)
   }
 
-  // BEGINNING OF FUNCTIONS FOR VEGGIE 7
+  // FUNCTIONS FOR VEGGIE 7
 
   function veggie7GoesRandom() {
     const randomInterval7 = setInterval(() => {
@@ -805,6 +815,175 @@ function main() {
     }, 300)
   }
 
+  // FUNCTIONS FOR VEGGIE 8
+
+  function veggie8GoesRandom() {
+    const randomInterval8 = setInterval(() => {
+      for (let i = 0; i < cells.length; i++) {
+        if (cells[i].classList.contains('vege8terri') && (cells[i].classList.contains('pacman-looking-up') || cells[i].classList.contains('pacman-looking-down') || cells[i].classList.contains('pacman-looking-left') || cells[i].classList.contains('pacman-looking-right'))) {
+          clearInterval(randomInterval8)
+          veggie8Chase()
+        }
+      }
+      const randomDirection = Math.floor(Math.random() * arrayOfDirections.length)
+      if (randomDirection === 0) {
+        if (!cells[vegetable8Position + 1].classList.contains('vege8terri')) {
+          return
+        }
+        cells[parseInt(vegetable8Position)].classList.remove('vegetable')
+        vegetable8Position += 1
+        cells[parseInt(vegetable8Position)].classList.add('vegetable')
+      } else if (randomDirection === 1) {
+        if (!cells[vegetable8Position - 1].classList.contains('vege8terri')) {
+          return
+        }
+        cells[parseInt(vegetable8Position)].classList.remove('vegetable')
+        vegetable8Position -= 1
+        cells[parseInt(vegetable8Position)].classList.add('vegetable')
+      } else if (randomDirection === 2) {
+        if (!cells[vegetable8Position - côté].classList.contains('vege8terri')) {
+          return
+        }
+        cells[parseInt(vegetable8Position)].classList.remove('vegetable')
+        vegetable8Position -= côté
+        cells[parseInt(vegetable8Position)].classList.add('vegetable')
+      } else if (randomDirection === 3) {
+        if (!cells[vegetable8Position + côté].classList.contains('vege8terri')) {
+          return
+        }
+        cells[parseInt(vegetable8Position)].classList.remove('vegetable')
+        vegetable8Position += côté
+        cells[parseInt(vegetable8Position)].classList.add('vegetable')
+      }
+    }, 300)
+  }
+
+  veggie8GoesRandom()
+
+  function veggie8Chase() {
+    const chaseInterval8 = setInterval(() => {
+      if (vegetable8Territory.includes(pacmanPosition)) {
+        if (pacmanPosition === vegetable8Position) {
+          alert('Oh no! You\'ve been caught!')
+          cells[parseInt(vegetable8Position)].classList.remove('vegetable')
+          vegetable8Position = 912
+          cells[parseInt(vegetable8Position)].classList.add('vegetable')
+        } else if (pacmanPosition > vegetable8Position) {
+          cells[parseInt(vegetable8Position)].classList.remove('vegetable')
+          if (vegetable8Territory.includes(vegetable8Position + 1) && (vegetable8Position + 1 === pacmanPosition || vegetable8Position + 2 === pacmanPosition || vegetable8Position + 3 === pacmanPosition || vegetable8Position + 4 === pacmanPosition || vegetable8Position + 5 === pacmanPosition)) {
+            vegetable8Position++
+          } else if (vegetable8Territory.includes(vegetable8Position + 1) && vegetable8Territory.includes(vegetable8Position + 2) && vegetable8Territory.includes(vegetable8Position + 3) && vegetable8Territory.includes(vegetable8Position + 4) && vegetable8Territory.includes(vegetable8Position + 5)) {
+            vegetable8Position++
+          } else if (vegetable8Territory.includes(vegetable8Position + 32)) {
+            vegetable8Position = vegetable8Position + 32
+          } else {
+            vegetable8Position--
+          }
+          cells[parseInt(vegetable8Position)].classList.add('vegetable')
+        } else if (pacmanPosition < vegetable8Position) {
+          cells[parseInt(vegetable8Position)].classList.remove('vegetable')
+          if (vegetable8Territory.includes(vegetable8Position - 1) && (vegetable8Position - 1 === pacmanPosition || vegetable8Position - 2 === pacmanPosition || vegetable8Position - 3 === pacmanPosition || vegetable8Position - 4 === pacmanPosition || vegetable8Position - 5 === pacmanPosition)) {
+            vegetable8Position--
+          } else if (vegetable8Territory.includes(vegetable8Position - 1) && vegetable8Territory.includes(vegetable8Position - 2) && vegetable8Territory.includes(vegetable8Position - 3) && vegetable8Territory.includes(vegetable8Position - 4) && vegetable8Territory.includes(vegetable8Position - 5) && vegetable8Territory.includes(vegetable8Position - 6)) {
+            vegetable8Position--
+          } else if (vegetable8Territory.includes(vegetable8Position - 32)) {
+            vegetable8Position = vegetable8Position - 32
+          } else {
+            vegetable8Position++
+          }
+          cells[parseInt(vegetable8Position)].classList.add('vegetable')
+        }
+      } else if (!vegetable8Territory.includes(pacmanPosition)) {
+        clearInterval(chaseInterval8)
+        veggie8GoesRandom()
+      }
+    }, 300)
+  }
+
+  // FUNCTIONS FOR VEGGIE 9
+
+  function veggie9GoesRandom() {
+    const randomInterval9 = setInterval(() => {
+      for (let i = 0; i < cells.length; i++) {
+        if (cells[i].classList.contains('vege9terri') && (cells[i].classList.contains('pacman-looking-up') || cells[i].classList.contains('pacman-looking-down') || cells[i].classList.contains('pacman-looking-left') || cells[i].classList.contains('pacman-looking-right'))) {
+          clearInterval(randomInterval9)
+          veggie9Chase()
+        }
+      }
+      const randomDirection = Math.floor(Math.random() * arrayOfDirections.length)
+      if (randomDirection === 0) {
+        if (!cells[vegetable9Position + 1].classList.contains('vege9terri')) {
+          return
+        }
+        cells[parseInt(vegetable9Position)].classList.remove('vegetable')
+        vegetable9Position += 1
+        cells[parseInt(vegetable9Position)].classList.add('vegetable')
+      } else if (randomDirection === 1) {
+        if (!cells[vegetable9Position - 1].classList.contains('vege9terri')) {
+          return
+        }
+        cells[parseInt(vegetable9Position)].classList.remove('vegetable')
+        vegetable9Position -= 1
+        cells[parseInt(vegetable9Position)].classList.add('vegetable')
+      } else if (randomDirection === 2) {
+        if (!cells[vegetable9Position - côté].classList.contains('vege9terri')) {
+          return
+        }
+        cells[parseInt(vegetable9Position)].classList.remove('vegetable')
+        vegetable9Position -= côté
+        cells[parseInt(vegetable9Position)].classList.add('vegetable')
+      } else if (randomDirection === 3) {
+        if (!cells[vegetable9Position + côté].classList.contains('vege9terri')) {
+          return
+        }
+        cells[parseInt(vegetable9Position)].classList.remove('vegetable')
+        vegetable9Position += côté
+        cells[parseInt(vegetable9Position)].classList.add('vegetable')
+      }
+    }, 300)
+  }
+
+  veggie9GoesRandom()
+
+  function veggie9Chase() {
+    const chaseInterval9 = setInterval(() => {
+      if (vegetable9Territory.includes(pacmanPosition)) {
+        if (pacmanPosition === vegetable9Position) {
+          alert('Oh no! You\'ve been caught!')
+          cells[parseInt(vegetable9Position)].classList.remove('vegetable')
+          vegetable9Position = 857
+          cells[parseInt(vegetable9Position)].classList.add('vegetable')
+        } else if (pacmanPosition > vegetable9Position) {
+          cells[parseInt(vegetable9Position)].classList.remove('vegetable')
+          if (vegetable9Territory.includes(vegetable9Position + 1) && (vegetable9Position + 1 === pacmanPosition || vegetable9Position + 2 === pacmanPosition || vegetable9Position + 3 === pacmanPosition || vegetable9Position + 4 === pacmanPosition || vegetable9Position + 5 === pacmanPosition)) {
+            vegetable9Position++
+          } else if (vegetable9Territory.includes(vegetable9Position + 1) && vegetable9Territory.includes(vegetable9Position + 2) && vegetable9Territory.includes(vegetable9Position + 3) && vegetable9Territory.includes(vegetable9Position + 4) && vegetable9Territory.includes(vegetable9Position + 5)) {
+            vegetable9Position++
+          } else if (vegetable9Territory.includes(vegetable9Position + 32)) {
+            vegetable9Position = vegetable9Position + 32
+          } else {
+            vegetable9Position--
+          }
+          cells[parseInt(vegetable9Position)].classList.add('vegetable')
+        } else if (pacmanPosition < vegetable9Position) {
+          cells[parseInt(vegetable9Position)].classList.remove('vegetable')
+          if (vegetable9Territory.includes(vegetable9Position - 1) && (vegetable9Position - 1 === pacmanPosition || vegetable9Position - 2 === pacmanPosition || vegetable9Position - 3 === pacmanPosition || vegetable9Position - 4 === pacmanPosition || vegetable9Position - 5 === pacmanPosition)) {
+            vegetable9Position--
+          } else if (vegetable9Territory.includes(vegetable9Position - 1) && vegetable9Territory.includes(vegetable9Position - 2) && vegetable9Territory.includes(vegetable9Position - 3) && vegetable9Territory.includes(vegetable9Position - 4) && vegetable9Territory.includes(vegetable9Position - 5) && vegetable9Territory.includes(vegetable9Position - 6)) {
+            vegetable9Position--
+          } else if (vegetable9Territory.includes(vegetable9Position - 32)) {
+            vegetable9Position = vegetable9Position - 32
+          } else {
+            vegetable9Position++
+          }
+          cells[parseInt(vegetable9Position)].classList.add('vegetable')
+        }
+      } else if (!vegetable9Territory.includes(pacmanPosition)) {
+        clearInterval(chaseInterval9)
+        veggie9GoesRandom()
+      }
+    }, 300)
+  }
 
 }
 
