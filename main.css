@@ -4,12 +4,19 @@
 
 body {
   height: 100vh;
+  background-image: url(images/neon.jpg);
+  background-size: cover;
+  color: aliceblue;
+  margin: 0;
+}
+
+main {
+  height: 100vh;
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-direction: row;
   margin: 0;
-  background-color: rgb(187, 45, 69);
 }
 
 .explanation {
@@ -25,11 +32,15 @@ body {
   border: 3px solid black;
   border-radius: 8px;
   padding: 10px;
+  background-image: url(images/instructions-back.jpg);
+  background-size: cover;
+  width: 600px;
 }
 
 .grid {
   display: flex;
   flex-direction: row;
+  background-color: black;
   border: 10px solid black;
   border-radius: 15px;
   width: 620px;
@@ -40,72 +51,91 @@ body {
 .cell {
   width: 3.125%;
   height: 3.125%;
-  background-color: rgb(92, 8, 117);
   font-size: 9px;
 }
 
+.apple {
+  background-image: url(images/slack-imgs.png);
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .pacman-looking-right {
-  background-image: url(images/pacman-looking-right.gif);
-  background-size: cover;
+  background-image: url(images/astronaut-looking-right.png);
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .pacman-looking-left {
-  background-image: url(images/pacman-looking-left.gif);
-  background-size: cover;
+  background-image: url(images/astronaut-looking-left.png);
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .pacman-looking-up {
-  background-image: url(images/pacman-looking-up.gif);
-  background-size: cover;
+  background-image: url(images/astronaut-looking-up.png);
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .pacman-looking-down {
-  background-image: url(images/pacman-looking-down.gif);
-  background-size: cover;
+  background-image: url(images/astronaut-looking-down.png);
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .wall {
-  background-color: violet;
-  border: 2px solid black;
+  background-image: url(images/asteroid.png);
+  background-size: contain;
 }
 
 .vegetable {
-  background-image: url(images/evil-broccoli.png);
+  background-image: url(images/ufo.png);
   background-size: cover;
 }
 
 .vege1terri {
-  background-color: burlywood;
+  /* background-color: burlywood; */
 }
 
 .vege2terri {
-  background-color: rgb(209, 155, 84);
+  /* background-color: rgb(209, 155, 84); */
 }
 
 .vege3terri {
-  background-color: rgb(167, 118, 55);
+  /* background-color: rgb(167, 118, 55); */
 }
 
 .vege4terri {
-  background-color: rgb(54, 33, 5);
+  /* background-color: rgb(167, 118, 55); */
 }
 
 .vege5terri {
-  background-color: rgb(32, 115, 121);
+  /* background-color: rgb(209, 155, 84); */
 }
 
 .vege6terri {
-  background-color: rgb(38, 143, 94);
+  /* background-color: burlywood; */
 }
 
 .vege7terri {
-  background-color: rgb(129, 28, 112);
+  /* background-color: burlywood; */
 }
 
 .vege8terri {
-  background-color: rgb(63, 109, 161);
+  /* background-color: rgb(209, 155, 84); */
 }
 
 .vege9terri {
-  background-color: rgb(202, 19, 34);
+  /* background-color: rgb(167, 118, 55); */
+}
+
+.letter {
+  width: 70px;
+  height: auto;
+}
+
+.star-wars-intro {
+  display: none;
 }
