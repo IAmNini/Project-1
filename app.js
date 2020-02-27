@@ -39,6 +39,10 @@ function main() {
   const starWarsIntro = document.querySelector('.star-wars-intro')
   const carefulStart = document.querySelector('.careful-start')
   const gridContainer = document.querySelector('.grid-container')
+  let pacmanUp = 'pacman-looking-up'
+  let pacmanDown = 'pacman-looking-down'
+  let pacmanLeft = 'pacman-looking-left'
+  let pacmanRight = 'pacman-looking-right'
 
   // STORY
 
@@ -64,7 +68,7 @@ function main() {
       cell.classList.add('cell')
       // cell.innerHTML = i
       if (i === pacmanPosition) {
-        cell.classList.add('pacman-looking-right')
+        cell.classList.add(pacmanRight)
       }
       if (i === vegetable1Position || i === vegetable2Position || i === vegetable3Position || i === vegetable4Position || i === vegetable5Position || i === vegetable6Position || i === vegetable7Position || i === vegetable8Position || i === vegetable9Position) {
         cell.classList.add('vegetable')
@@ -82,8 +86,18 @@ function main() {
       cells[wallPosition[i]].classList.add('wall')
     }
 
+    // PATH AND ROCKET POSITIONS
+
+    const path = []
+    for (let i = 0; i < gridCellCount; i++) {
+      if (!cells[i].classList.contains('wall')) {
+        path.push(i)
+      }
+    }
+    const rocketPosition = path[Math.floor(Math.random() * path.length)]
+    cells[rocketPosition].classList.add('rocket-looking-up')
+
     // TERRITORY CLASSES LOOPS
-    // won't actually be colored, just need to see it right now
 
     for (let i = 0; i < vegetable1Territory.length; i++) {
       cells[vegetable1Territory[i]].classList.add('vege1terri')
@@ -128,62 +142,62 @@ function main() {
         if (pacmanPosition === cells.length - 1 || cells[pacmanPosition + 1].classList.contains('wall')) {
           return
         }
-        if (cells[pacmanPosition].classList.contains('pacman-looking-right')) {
-          cells[pacmanPosition].classList.remove('pacman-looking-right')
-        } else if (cells[pacmanPosition].classList.contains('pacman-looking-left')) {
-          cells[pacmanPosition].classList.remove('pacman-looking-left')
-        } else if (cells[pacmanPosition].classList.contains('pacman-looking-up')) {
-          cells[pacmanPosition].classList.remove('pacman-looking-up')
-        } else if (cells[pacmanPosition].classList.contains('pacman-looking-down')) {
-          cells[pacmanPosition].classList.remove('pacman-looking-down')
+        if (cells[pacmanPosition].classList.contains(pacmanRight)) {
+          cells[pacmanPosition].classList.remove(pacmanRight)
+        } else if (cells[pacmanPosition].classList.contains(pacmanLeft)) {
+          cells[pacmanPosition].classList.remove(pacmanLeft)
+        } else if (cells[pacmanPosition].classList.contains(pacmanUp)) {
+          cells[pacmanPosition].classList.remove(pacmanUp)
+        } else if (cells[pacmanPosition].classList.contains(pacmanDown)) {
+          cells[pacmanPosition].classList.remove(pacmanDown)
         }
         pacmanPosition += 1
-        cells[pacmanPosition].classList.add('pacman-looking-right')
+        cells[pacmanPosition].classList.add(pacmanRight)
       } else if (event.key === 'ArrowLeft') {
         if (pacmanPosition === 0 || cells[pacmanPosition - 1].classList.contains('wall')) {
           return
         }
-        if (cells[pacmanPosition].classList.contains('pacman-looking-right')) {
-          cells[pacmanPosition].classList.remove('pacman-looking-right')
-        } else if (cells[pacmanPosition].classList.contains('pacman-looking-left')) {
-          cells[pacmanPosition].classList.remove('pacman-looking-left')
-        } else if (cells[pacmanPosition].classList.contains('pacman-looking-up')) {
-          cells[pacmanPosition].classList.remove('pacman-looking-up')
-        } else if (cells[pacmanPosition].classList.contains('pacman-looking-down')) {
-          cells[pacmanPosition].classList.remove('pacman-looking-down')
+        if (cells[pacmanPosition].classList.contains(pacmanRight)) {
+          cells[pacmanPosition].classList.remove(pacmanRight)
+        } else if (cells[pacmanPosition].classList.contains(pacmanLeft)) {
+          cells[pacmanPosition].classList.remove(pacmanLeft)
+        } else if (cells[pacmanPosition].classList.contains(pacmanUp)) {
+          cells[pacmanPosition].classList.remove(pacmanUp)
+        } else if (cells[pacmanPosition].classList.contains(pacmanDown)) {
+          cells[pacmanPosition].classList.remove(pacmanDown)
         }
         pacmanPosition -= 1
-        cells[pacmanPosition].classList.add('pacman-looking-left')
+        cells[pacmanPosition].classList.add(pacmanLeft)
       } else if (event.key === 'ArrowUp') {
         if (cells[pacmanPosition - côté].classList.contains('wall')) {
           return
         }
-        if (cells[pacmanPosition].classList.contains('pacman-looking-right')) {
-          cells[pacmanPosition].classList.remove('pacman-looking-right')
-        } else if (cells[pacmanPosition].classList.contains('pacman-looking-left')) {
-          cells[pacmanPosition].classList.remove('pacman-looking-left')
-        } else if (cells[pacmanPosition].classList.contains('pacman-looking-up')) {
-          cells[pacmanPosition].classList.remove('pacman-looking-up')
-        } else if (cells[pacmanPosition].classList.contains('pacman-looking-down')) {
-          cells[pacmanPosition].classList.remove('pacman-looking-down')
+        if (cells[pacmanPosition].classList.contains(pacmanRight)) {
+          cells[pacmanPosition].classList.remove(pacmanRight)
+        } else if (cells[pacmanPosition].classList.contains(pacmanLeft)) {
+          cells[pacmanPosition].classList.remove(pacmanLeft)
+        } else if (cells[pacmanPosition].classList.contains(pacmanUp)) {
+          cells[pacmanPosition].classList.remove(pacmanUp)
+        } else if (cells[pacmanPosition].classList.contains(pacmanDown)) {
+          cells[pacmanPosition].classList.remove(pacmanDown)
         }
         pacmanPosition -= côté
-        cells[pacmanPosition].classList.add('pacman-looking-up')
+        cells[pacmanPosition].classList.add(pacmanUp)
       } else if (event.key === 'ArrowDown') {
         if (cells[pacmanPosition + côté].classList.contains('wall')) {
           return
         }
-        if (cells[pacmanPosition].classList.contains('pacman-looking-right')) {
-          cells[pacmanPosition].classList.remove('pacman-looking-right')
-        } else if (cells[pacmanPosition].classList.contains('pacman-looking-left')) {
-          cells[pacmanPosition].classList.remove('pacman-looking-left')
-        } else if (cells[pacmanPosition].classList.contains('pacman-looking-up')) {
-          cells[pacmanPosition].classList.remove('pacman-looking-up')
-        } else if (cells[pacmanPosition].classList.contains('pacman-looking-down')) {
-          cells[pacmanPosition].classList.remove('pacman-looking-down')
+        if (cells[pacmanPosition].classList.contains(pacmanRight)) {
+          cells[pacmanPosition].classList.remove(pacmanRight)
+        } else if (cells[pacmanPosition].classList.contains(pacmanLeft)) {
+          cells[pacmanPosition].classList.remove(pacmanLeft)
+        } else if (cells[pacmanPosition].classList.contains(pacmanUp)) {
+          cells[pacmanPosition].classList.remove(pacmanUp)
+        } else if (cells[pacmanPosition].classList.contains(pacmanDown)) {
+          cells[pacmanPosition].classList.remove(pacmanDown)
         }
         pacmanPosition += côté
-        cells[pacmanPosition].classList.add('pacman-looking-down')
+        cells[pacmanPosition].classList.add(pacmanDown)
       }
       if (cells[pacmanPosition].classList.contains('apple')) {
         cells[pacmanPosition].classList.remove('apple')
@@ -200,6 +214,9 @@ function main() {
           grid.style.display = 'none'
           gridContainer.classList.add('success-screen')
         }
+      }
+      if (pacmanPosition === rocketPosition) {
+        rocketTime()
       }
     })
 
@@ -273,7 +290,7 @@ function main() {
     function veggie1GoesRandom() {
       const randomInterval1 = setInterval(() => {
         for (let i = 0; i < cells.length; i++) {
-          if (cells[i].classList.contains('vege1terri') && (cells[i].classList.contains('pacman-looking-up') || cells[i].classList.contains('pacman-looking-down') || cells[i].classList.contains('pacman-looking-left') || cells[i].classList.contains('pacman-looking-right'))) {
+          if (cells[i].classList.contains('vege1terri') && (cells[i].classList.contains('pacman-looking-up') || cells[i].classList.contains(pacmanDown) || cells[i].classList.contains(pacmanLeft) || cells[i].classList.contains(pacmanRight))) {
             clearInterval(randomInterval1)
             veggie1Chase()
           }
@@ -316,27 +333,38 @@ function main() {
     function veggie1Chase() {
       const chaseInterval1 = setInterval(() => {
         if (vegetable1Territory.includes(pacmanPosition)) {
+          if (pacmanUp === 'rocket-looking-up') {
+            clearInterval(chaseInterval1)
+            if (pacmanPosition === vegetable1Position) {
+              cells[vegetable1Position].classList.remove('vegetable')
+              setTimeout(() => {
+                vegetable1Position = 166
+                cells[vegetable1Position].classList.add('vegetable')
+              }, 5000)
+            }
+          }
           if (pacmanPosition === vegetable1Position) {
-            alert('Oh no! You\'ve been caught!')
+            // cells[pacmanPosition].classList.add('hurt')
             lives--
             livesDisplay.innerHTML = lives
             if (lives === 0) {
               grid.style.display = 'none'
               gridContainer.classList.add('game-over-screen')
+              clearInterval(chaseInterval1)
             }
             cells[parseInt(vegetable1Position)].classList.remove('vegetable')
             vegetable1Position = 166
-            if (cells[pacmanPosition].classList.contains('pacman-looking-right')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-right')
-            } else if (cells[pacmanPosition].classList.contains('pacman-looking-left')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-left')
-            } else if (cells[pacmanPosition].classList.contains('pacman-looking-up')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-up')
-            } else if (cells[pacmanPosition].classList.contains('pacman-looking-down')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-down')
+            if (cells[pacmanPosition].classList.contains(pacmanRight)) {
+              cells[pacmanPosition].classList.remove(pacmanRight)
+            } else if (cells[pacmanPosition].classList.contains(pacmanLeft)) {
+              cells[pacmanPosition].classList.remove(pacmanLeft)
+            } else if (cells[pacmanPosition].classList.contains(pacmanUp)) {
+              cells[pacmanPosition].classList.remove(pacmanUp)
+            } else if (cells[pacmanPosition].classList.contains(pacmanDown)) {
+              cells[pacmanPosition].classList.remove(pacmanDown)
             }
             pacmanPosition = 33
-            cells[pacmanPosition].classList.add('pacman-looking-right')
+            cells[pacmanPosition].classList.add(pacmanRight)
             cells[parseInt(vegetable1Position)].classList.add('vegetable')
           } else if (pacmanPosition > vegetable1Position) {
             cells[parseInt(vegetable1Position)].classList.remove('vegetable')
@@ -375,7 +403,7 @@ function main() {
     function veggie2GoesRandom() {
       const randomInterval2 = setInterval(() => {
         for (let i = 0; i < cells.length; i++) {
-          if (cells[i].classList.contains('vege2terri') && (cells[i].classList.contains('pacman-looking-up') || cells[i].classList.contains('pacman-looking-down') || cells[i].classList.contains('pacman-looking-left') || cells[i].classList.contains('pacman-looking-right'))) {
+          if (cells[i].classList.contains('vege2terri') && (cells[i].classList.contains(pacmanUp) || cells[i].classList.contains(pacmanDown) || cells[i].classList.contains(pacmanLeft) || cells[i].classList.contains(pacmanRight))) {
             clearInterval(randomInterval2)
             veggie2Chase()
           }
@@ -418,27 +446,37 @@ function main() {
     function veggie2Chase() {
       const chaseInterval2 = setInterval(() => {
         if (vegetable2Territory.includes(pacmanPosition)) {
+          if (pacmanUp === 'rocket-looking-up') {
+            clearInterval(chaseInterval2)
+            if (pacmanPosition === vegetable2Position) {
+              cells[vegetable2Position].classList.remove('vegetable')
+              setTimeout(() => {
+                vegetable2Position = 111
+                cells[vegetable2Position].classList.add('vegetable')
+              }, 5000)
+            }
+          }
           if (pacmanPosition === vegetable2Position) {
-            alert('Oh no! You\'ve been caught!')
             lives--
             livesDisplay.innerHTML = lives
             if (lives === 0) {
               grid.style.display = 'none'
               gridContainer.classList.add('game-over-screen')
+              clearInterval(chaseInterval2)
             }
             cells[parseInt(vegetable2Position)].classList.remove('vegetable')
             vegetable2Position = 111
-            if (cells[pacmanPosition].classList.contains('pacman-looking-right')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-right')
-            } else if (cells[pacmanPosition].classList.contains('pacman-looking-left')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-left')
-            } else if (cells[pacmanPosition].classList.contains('pacman-looking-up')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-up')
-            } else if (cells[pacmanPosition].classList.contains('pacman-looking-down')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-down')
+            if (cells[pacmanPosition].classList.contains(pacmanRight)) {
+              cells[pacmanPosition].classList.remove(pacmanRight)
+            } else if (cells[pacmanPosition].classList.contains(pacmanLeft)) {
+              cells[pacmanPosition].classList.remove(pacmanLeft)
+            } else if (cells[pacmanPosition].classList.contains(pacmanUp)) {
+              cells[pacmanPosition].classList.remove(pacmanUp)
+            } else if (cells[pacmanPosition].classList.contains(pacmanDown)) {
+              cells[pacmanPosition].classList.remove(pacmanDown)
             }
             pacmanPosition = 33
-            cells[pacmanPosition].classList.add('pacman-looking-right')
+            cells[pacmanPosition].classList.add(pacmanRight)
             cells[parseInt(vegetable2Position)].classList.add('vegetable')
           } else if (pacmanPosition > vegetable2Position) {
             cells[parseInt(vegetable2Position)].classList.remove('vegetable')
@@ -477,7 +515,7 @@ function main() {
     function veggie3GoesRandom() {
       const randomInterval3 = setInterval(() => {
         for (let i = 0; i < cells.length; i++) {
-          if (cells[i].classList.contains('vege3terri') && (cells[i].classList.contains('pacman-looking-up') || cells[i].classList.contains('pacman-looking-down') || cells[i].classList.contains('pacman-looking-left') || cells[i].classList.contains('pacman-looking-right'))) {
+          if (cells[i].classList.contains('vege3terri') && (cells[i].classList.contains(pacmanUp) || cells[i].classList.contains(pacmanDown) || cells[i].classList.contains(pacmanLeft) || cells[i].classList.contains(pacmanRight))) {
             clearInterval(randomInterval3)
             veggie3Chase()
           }
@@ -520,27 +558,37 @@ function main() {
     function veggie3Chase() {
       const chaseInterval3 = setInterval(() => {
         if (vegetable3Territory.includes(pacmanPosition)) {
+          if (pacmanUp === 'rocket-looking-up') {
+            clearInterval(chaseInterval3)
+            if (pacmanPosition === vegetable3Position) {
+              cells[vegetable3Position].classList.remove('vegetable')
+              setTimeout(() => {
+                vegetable3Position = 185
+                cells[vegetable3Position].classList.add('vegetable')
+              }, 5000)
+            }
+          }
           if (pacmanPosition === vegetable3Position) {
-            alert('Oh no! You\'ve been caught!')
             lives--
             livesDisplay.innerHTML = lives
             if (lives === 0) {
               grid.style.display = 'none'
               gridContainer.classList.add('game-over-screen')
+              clearInterval(chaseInterval3)
             }
             cells[parseInt(vegetable3Position)].classList.remove('vegetable')
             vegetable3Position = 185
-            if (cells[pacmanPosition].classList.contains('pacman-looking-right')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-right')
-            } else if (cells[pacmanPosition].classList.contains('pacman-looking-left')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-left')
-            } else if (cells[pacmanPosition].classList.contains('pacman-looking-up')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-up')
-            } else if (cells[pacmanPosition].classList.contains('pacman-looking-down')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-down')
+            if (cells[pacmanPosition].classList.contains(pacmanRight)) {
+              cells[pacmanPosition].classList.remove(pacmanRight)
+            } else if (cells[pacmanPosition].classList.contains(pacmanLeft)) {
+              cells[pacmanPosition].classList.remove(pacmanLeft)
+            } else if (cells[pacmanPosition].classList.contains(pacmanUp)) {
+              cells[pacmanPosition].classList.remove(pacmanUp)
+            } else if (cells[pacmanPosition].classList.contains(pacmanDown)) {
+              cells[pacmanPosition].classList.remove(pacmanDown)
             }
             pacmanPosition = 33
-            cells[pacmanPosition].classList.add('pacman-looking-right')
+            cells[pacmanPosition].classList.add(pacmanRight)
             cells[parseInt(vegetable3Position)].classList.add('vegetable')
           } else if (pacmanPosition > vegetable3Position) {
             cells[parseInt(vegetable3Position)].classList.remove('vegetable')
@@ -579,7 +627,7 @@ function main() {
     function veggie4GoesRandom() {
       const randomInterval4 = setInterval(() => {
         for (let i = 0; i < cells.length; i++) {
-          if (cells[i].classList.contains('vege4terri') && (cells[i].classList.contains('pacman-looking-up') || cells[i].classList.contains('pacman-looking-down') || cells[i].classList.contains('pacman-looking-left') || cells[i].classList.contains('pacman-looking-right'))) {
+          if (cells[i].classList.contains('vege4terri') && (cells[i].classList.contains(pacmanUp) || cells[i].classList.contains(pacmanDown) || cells[i].classList.contains(pacmanLeft) || cells[i].classList.contains(pacmanRight))) {
             clearInterval(randomInterval4)
             veggie4Chase()
           }
@@ -622,27 +670,37 @@ function main() {
     function veggie4Chase() {
       const chaseInterval4 = setInterval(() => {
         if (vegetable4Territory.includes(pacmanPosition)) {
+          if (pacmanUp === 'rocket-looking-up') {
+            clearInterval(chaseInterval4)
+            if (pacmanPosition === vegetable4Position) {
+              cells[vegetable4Position].classList.remove('vegetable')
+              setTimeout(() => {
+                vegetable4Position = 489
+                cells[vegetable4Position].classList.add('vegetable')
+              }, 5000)
+            }
+          }
           if (pacmanPosition === vegetable4Position) {
-            alert('Oh no! You\'ve been caught!')
             lives--
             livesDisplay.innerHTML = lives
             if (lives === 0) {
               grid.style.display = 'none'
               gridContainer.classList.add('game-over-screen')
+              clearInterval(chaseInterval4)
             }
             cells[parseInt(vegetable4Position)].classList.remove('vegetable')
             vegetable4Position = 489
-            if (cells[pacmanPosition].classList.contains('pacman-looking-right')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-right')
-            } else if (cells[pacmanPosition].classList.contains('pacman-looking-left')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-left')
-            } else if (cells[pacmanPosition].classList.contains('pacman-looking-up')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-up')
-            } else if (cells[pacmanPosition].classList.contains('pacman-looking-down')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-down')
+            if (cells[pacmanPosition].classList.contains(pacmanRight)) {
+              cells[pacmanPosition].classList.remove(pacmanRight)
+            } else if (cells[pacmanPosition].classList.contains(pacmanLeft)) {
+              cells[pacmanPosition].classList.remove(pacmanLeft)
+            } else if (cells[pacmanPosition].classList.contains(pacmanUp)) {
+              cells[pacmanPosition].classList.remove(pacmanUp)
+            } else if (cells[pacmanPosition].classList.contains(pacmanDown)) {
+              cells[pacmanPosition].classList.remove(pacmanDown)
             }
             pacmanPosition = 33
-            cells[pacmanPosition].classList.add('pacman-looking-right')
+            cells[pacmanPosition].classList.add(pacmanRight)
             cells[parseInt(vegetable4Position)].classList.add('vegetable')
           } else if (pacmanPosition > vegetable4Position) {
             cells[parseInt(vegetable4Position)].classList.remove('vegetable')
@@ -681,7 +739,7 @@ function main() {
     function veggie5GoesRandom() {
       const randomInterval5 = setInterval(() => {
         for (let i = 0; i < cells.length; i++) {
-          if (cells[i].classList.contains('vege5terri') && (cells[i].classList.contains('pacman-looking-up') || cells[i].classList.contains('pacman-looking-down') || cells[i].classList.contains('pacman-looking-left') || cells[i].classList.contains('pacman-looking-right'))) {
+          if (cells[i].classList.contains('vege5terri') && (cells[i].classList.contains(pacmanUp) || cells[i].classList.contains(pacmanDown) || cells[i].classList.contains(pacmanLeft) || cells[i].classList.contains(pacmanRight))) {
             clearInterval(randomInterval5)
             veggie5Chase()
           }
@@ -724,27 +782,37 @@ function main() {
     function veggie5Chase() {
       const chaseInterval5 = setInterval(() => {
         if (vegetable5Territory.includes(pacmanPosition)) {
+          if (pacmanUp === 'rocket-looking-up') {
+            clearInterval(chaseInterval5)
+            if (pacmanPosition === vegetable5Position) {
+              cells[vegetable5Position].classList.remove('vegetable')
+              setTimeout(() => {
+                vegetable5Position = 363
+                cells[vegetable5Position].classList.add('vegetable')
+              }, 5000)
+            }
+          }
           if (pacmanPosition === vegetable5Position) {
-            alert('Oh no! You\'ve been caught!')
             lives--
             livesDisplay.innerHTML = lives
             if (lives === 0) {
               grid.style.display = 'none'
               gridContainer.classList.add('game-over-screen')
+              clearInterval(chaseInterval5)
             }
             cells[parseInt(vegetable5Position)].classList.remove('vegetable')
-            vegetable5Position = 185
-            if (cells[pacmanPosition].classList.contains('pacman-looking-right')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-right')
-            } else if (cells[pacmanPosition].classList.contains('pacman-looking-left')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-left')
-            } else if (cells[pacmanPosition].classList.contains('pacman-looking-up')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-up')
-            } else if (cells[pacmanPosition].classList.contains('pacman-looking-down')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-down')
+            vegetable5Position = 363
+            if (cells[pacmanPosition].classList.contains(pacmanRight)) {
+              cells[pacmanPosition].classList.remove(pacmanRight)
+            } else if (cells[pacmanPosition].classList.contains(pacmanLeft)) {
+              cells[pacmanPosition].classList.remove(pacmanLeft)
+            } else if (cells[pacmanPosition].classList.contains(pacmanUp)) {
+              cells[pacmanPosition].classList.remove(pacmanUp)
+            } else if (cells[pacmanPosition].classList.contains(pacmanDown)) {
+              cells[pacmanPosition].classList.remove(pacmanDown)
             }
             pacmanPosition = 33
-            cells[pacmanPosition].classList.add('pacman-looking-right')
+            cells[pacmanPosition].classList.add(pacmanRight)
             cells[parseInt(vegetable5Position)].classList.add('vegetable')
           } else if (pacmanPosition > vegetable5Position) {
             cells[parseInt(vegetable5Position)].classList.remove('vegetable')
@@ -783,7 +851,7 @@ function main() {
     function veggie6GoesRandom() {
       const randomInterval6 = setInterval(() => {
         for (let i = 0; i < cells.length; i++) {
-          if (cells[i].classList.contains('vege6terri') && (cells[i].classList.contains('pacman-looking-up') || cells[i].classList.contains('pacman-looking-down') || cells[i].classList.contains('pacman-looking-left') || cells[i].classList.contains('pacman-looking-right'))) {
+          if (cells[i].classList.contains('vege6terri') && (cells[i].classList.contains(pacmanUp) || cells[i].classList.contains(pacmanDown) || cells[i].classList.contains(pacmanLeft) || cells[i].classList.contains(pacmanRight))) {
             clearInterval(randomInterval6)
             veggie6Chase()
           }
@@ -826,27 +894,37 @@ function main() {
     function veggie6Chase() {
       const chaseInterval6 = setInterval(() => {
         if (vegetable6Territory.includes(pacmanPosition)) {
+          if (pacmanUp === 'rocket-looking-up') {
+            clearInterval(chaseInterval6)
+            if (pacmanPosition === vegetable6Position) {
+              cells[vegetable6Position].classList.remove('vegetable')
+              setTimeout(() => {
+                vegetable6Position = 473
+                cells[vegetable6Position].classList.add('vegetable')
+              }, 5000)
+            }
+          }
           if (pacmanPosition === vegetable6Position) {
-            alert('Oh no! You\'ve been caught!')
             lives--
             livesDisplay.innerHTML = lives
             if (lives === 0) {
               grid.style.display = 'none'
               gridContainer.classList.add('game-over-screen')
+              clearInterval(chaseInterval6)
             }
             cells[parseInt(vegetable6Position)].classList.remove('vegetable')
             vegetable6Position = 473
-            if (cells[pacmanPosition].classList.contains('pacman-looking-right')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-right')
-            } else if (cells[pacmanPosition].classList.contains('pacman-looking-left')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-left')
-            } else if (cells[pacmanPosition].classList.contains('pacman-looking-up')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-up')
-            } else if (cells[pacmanPosition].classList.contains('pacman-looking-down')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-down')
+            if (cells[pacmanPosition].classList.contains(pacmanRight)) {
+              cells[pacmanPosition].classList.remove(pacmanRight)
+            } else if (cells[pacmanPosition].classList.contains(pacmanLeft)) {
+              cells[pacmanPosition].classList.remove(pacmanLeft)
+            } else if (cells[pacmanPosition].classList.contains(pacmanUp)) {
+              cells[pacmanPosition].classList.remove(pacmanUp)
+            } else if (cells[pacmanPosition].classList.contains(pacmanDown)) {
+              cells[pacmanPosition].classList.remove(pacmanDown)
             }
             pacmanPosition = 33
-            cells[pacmanPosition].classList.add('pacman-looking-right')
+            cells[pacmanPosition].classList.add(pacmanRight)
             cells[parseInt(vegetable6Position)].classList.add('vegetable')
           } else if (pacmanPosition > vegetable6Position) {
             cells[parseInt(vegetable6Position)].classList.remove('vegetable')
@@ -885,7 +963,7 @@ function main() {
     function veggie7GoesRandom() {
       const randomInterval7 = setInterval(() => {
         for (let i = 0; i < cells.length; i++) {
-          if (cells[i].classList.contains('vege7terri') && (cells[i].classList.contains('pacman-looking-up') || cells[i].classList.contains('pacman-looking-down') || cells[i].classList.contains('pacman-looking-left') || cells[i].classList.contains('pacman-looking-right'))) {
+          if (cells[i].classList.contains('vege7terri') && (cells[i].classList.contains(pacmanUp) || cells[i].classList.contains(pacmanDown) || cells[i].classList.contains(pacmanLeft) || cells[i].classList.contains(pacmanRight))) {
             clearInterval(randomInterval7)
             veggie7Chase()
           }
@@ -928,27 +1006,37 @@ function main() {
     function veggie7Chase() {
       const chaseInterval7 = setInterval(() => {
         if (vegetable7Territory.includes(pacmanPosition)) {
+          if (pacmanUp === 'rocket-looking-up') {
+            clearInterval(chaseInterval7)
+            if (pacmanPosition === vegetable7Position) {
+              cells[vegetable7Position].classList.remove('vegetable')
+              setTimeout(() => {
+                vegetable7Position = 838
+                cells[vegetable7Position].classList.add('vegetable')
+              }, 5000)
+            }
+          }
           if (pacmanPosition === vegetable7Position) {
-            alert('Oh no! You\'ve been caught!')
             lives--
             livesDisplay.innerHTML = lives
             if (lives === 0) {
               grid.style.display = 'none'
               gridContainer.classList.add('game-over-screen')
+              clearInterval(chaseInterval7)
             }
             cells[parseInt(vegetable7Position)].classList.remove('vegetable')
             vegetable7Position = 838
-            if (cells[pacmanPosition].classList.contains('pacman-looking-right')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-right')
-            } else if (cells[pacmanPosition].classList.contains('pacman-looking-left')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-left')
-            } else if (cells[pacmanPosition].classList.contains('pacman-looking-up')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-up')
-            } else if (cells[pacmanPosition].classList.contains('pacman-looking-down')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-down')
+            if (cells[pacmanPosition].classList.contains(pacmanRight)) {
+              cells[pacmanPosition].classList.remove(pacmanRight)
+            } else if (cells[pacmanPosition].classList.contains(pacmanLeft)) {
+              cells[pacmanPosition].classList.remove(pacmanLeft)
+            } else if (cells[pacmanPosition].classList.contains(pacmanUp)) {
+              cells[pacmanPosition].classList.remove(pacmanUp)
+            } else if (cells[pacmanPosition].classList.contains(pacmanDown)) {
+              cells[pacmanPosition].classList.remove(pacmanDown)
             }
             pacmanPosition = 33
-            cells[pacmanPosition].classList.add('pacman-looking-right')
+            cells[pacmanPosition].classList.add(pacmanRight)
             cells[parseInt(vegetable7Position)].classList.add('vegetable')
           } else if (pacmanPosition > vegetable7Position) {
             cells[parseInt(vegetable7Position)].classList.remove('vegetable')
@@ -987,7 +1075,7 @@ function main() {
     function veggie8GoesRandom() {
       const randomInterval8 = setInterval(() => {
         for (let i = 0; i < cells.length; i++) {
-          if (cells[i].classList.contains('vege8terri') && (cells[i].classList.contains('pacman-looking-up') || cells[i].classList.contains('pacman-looking-down') || cells[i].classList.contains('pacman-looking-left') || cells[i].classList.contains('pacman-looking-right'))) {
+          if (cells[i].classList.contains('vege8terri') && (cells[i].classList.contains(pacmanUp) || cells[i].classList.contains(pacmanDown) || cells[i].classList.contains(pacmanLeft) || cells[i].classList.contains(pacmanRight))) {
             clearInterval(randomInterval8)
             veggie8Chase()
           }
@@ -1030,27 +1118,37 @@ function main() {
     function veggie8Chase() {
       const chaseInterval8 = setInterval(() => {
         if (vegetable8Territory.includes(pacmanPosition)) {
+          if (pacmanUp === 'rocket-looking-up') {
+            clearInterval(chaseInterval8)
+            if (pacmanPosition === vegetable8Position) {
+              cells[vegetable8Position].classList.remove('vegetable')
+              setTimeout(() => {
+                vegetable8Position = 912
+                cells[vegetable8Position].classList.add('vegetable')
+              }, 5000)
+            }
+          }
           if (pacmanPosition === vegetable8Position) {
-            alert('Oh no! You\'ve been caught!')
             lives--
             livesDisplay.innerHTML = lives
             if (lives === 0) {
               grid.style.display = 'none'
               gridContainer.classList.add('game-over-screen')
+              clearInterval(chaseInterval8)
             }
             cells[parseInt(vegetable8Position)].classList.remove('vegetable')
             vegetable8Position = 912
-            if (cells[pacmanPosition].classList.contains('pacman-looking-right')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-right')
-            } else if (cells[pacmanPosition].classList.contains('pacman-looking-left')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-left')
-            } else if (cells[pacmanPosition].classList.contains('pacman-looking-up')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-up')
-            } else if (cells[pacmanPosition].classList.contains('pacman-looking-down')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-down')
+            if (cells[pacmanPosition].classList.contains(pacmanRight)) {
+              cells[pacmanPosition].classList.remove(pacmanRight)
+            } else if (cells[pacmanPosition].classList.contains(pacmanLeft)) {
+              cells[pacmanPosition].classList.remove(pacmanLeft)
+            } else if (cells[pacmanPosition].classList.contains(pacmanUp)) {
+              cells[pacmanPosition].classList.remove(pacmanUp)
+            } else if (cells[pacmanPosition].classList.contains(pacmanDown)) {
+              cells[pacmanPosition].classList.remove(pacmanDown)
             }
             pacmanPosition = 33
-            cells[pacmanPosition].classList.add('pacman-looking-right')
+            cells[pacmanPosition].classList.add(pacmanRight)
             cells[parseInt(vegetable8Position)].classList.add('vegetable')
           } else if (pacmanPosition > vegetable8Position) {
             cells[parseInt(vegetable8Position)].classList.remove('vegetable')
@@ -1089,7 +1187,7 @@ function main() {
     function veggie9GoesRandom() {
       const randomInterval9 = setInterval(() => {
         for (let i = 0; i < cells.length; i++) {
-          if (cells[i].classList.contains('vege9terri') && (cells[i].classList.contains('pacman-looking-up') || cells[i].classList.contains('pacman-looking-down') || cells[i].classList.contains('pacman-looking-left') || cells[i].classList.contains('pacman-looking-right'))) {
+          if (cells[i].classList.contains('vege9terri') && (cells[i].classList.contains(pacmanUp) || cells[i].classList.contains(pacmanDown) || cells[i].classList.contains(pacmanLeft) || cells[i].classList.contains(pacmanRight))) {
             clearInterval(randomInterval9)
             veggie9Chase()
           }
@@ -1132,27 +1230,37 @@ function main() {
     function veggie9Chase() {
       const chaseInterval9 = setInterval(() => {
         if (vegetable9Territory.includes(pacmanPosition)) {
+          if (pacmanUp === 'rocket-looking-up') {
+            clearInterval(chaseInterval9)
+            if (pacmanPosition === vegetable9Position) {
+              cells[vegetable9Position].classList.remove('vegetable')
+              setTimeout(() => {
+                vegetable9Position = 857
+                cells[vegetable9Position].classList.add('vegetable')
+              }, 5000)
+            }
+          }
           if (pacmanPosition === vegetable9Position) {
-            alert('Oh no! You\'ve been caught!')
             lives--
             livesDisplay.innerHTML = lives
             if (lives === 0) {
               grid.style.display = 'none'
               gridContainer.classList.add('game-over-screen')
+              clearInterval(chaseInterval9)
             }
             cells[parseInt(vegetable9Position)].classList.remove('vegetable')
             vegetable9Position = 857
-            if (cells[pacmanPosition].classList.contains('pacman-looking-right')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-right')
-            } else if (cells[pacmanPosition].classList.contains('pacman-looking-left')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-left')
-            } else if (cells[pacmanPosition].classList.contains('pacman-looking-up')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-up')
-            } else if (cells[pacmanPosition].classList.contains('pacman-looking-down')) {
-              cells[pacmanPosition].classList.remove('pacman-looking-down')
+            if (cells[pacmanPosition].classList.contains(pacmanRight)) {
+              cells[pacmanPosition].classList.remove(pacmanRight)
+            } else if (cells[pacmanPosition].classList.contains(pacmanLeft)) {
+              cells[pacmanPosition].classList.remove(pacmanLeft)
+            } else if (cells[pacmanPosition].classList.contains(pacmanUp)) {
+              cells[pacmanPosition].classList.remove(pacmanUp)
+            } else if (cells[pacmanPosition].classList.contains(pacmanDown)) {
+              cells[pacmanPosition].classList.remove(pacmanDown)
             }
             pacmanPosition = 33
-            cells[pacmanPosition].classList.add('pacman-looking-right')
+            cells[pacmanPosition].classList.add(pacmanRight)
             cells[parseInt(vegetable9Position)].classList.add('vegetable')
           } else if (pacmanPosition > vegetable9Position) {
             cells[parseInt(vegetable9Position)].classList.remove('vegetable')
@@ -1185,8 +1293,43 @@ function main() {
         }
       }, 300)
     }
-  })
 
+    // ROCKET TIME
+
+    function rocketTime() {
+      cells[rocketPosition].classList.remove('rocket-looking-up')
+      if (cells[pacmanPosition].classList.contains(pacmanRight)) {
+        cells[pacmanPosition].classList.remove(pacmanRight)
+      } else if (cells[pacmanPosition].classList.contains(pacmanLeft)) {
+        cells[pacmanPosition].classList.remove(pacmanLeft)
+      } else if (cells[pacmanPosition].classList.contains(pacmanUp)) {
+        cells[pacmanPosition].classList.remove(pacmanUp)
+      } else if (cells[pacmanPosition].classList.contains(pacmanDown)) {
+        cells[pacmanPosition].classList.remove(pacmanDown)
+      }
+      pacmanUp = 'rocket-looking-up'
+      pacmanDown = 'rocket-looking-down'
+      pacmanLeft = 'rocket-looking-left'
+      pacmanRight = 'rocket-looking-right'
+
+      setTimeout(() => {
+        if (cells[pacmanPosition].classList.contains(pacmanRight)) {
+          cells[pacmanPosition].classList.remove(pacmanRight)
+        } else if (cells[pacmanPosition].classList.contains(pacmanLeft)) {
+          cells[pacmanPosition].classList.remove(pacmanLeft)
+        } else if (cells[pacmanPosition].classList.contains(pacmanUp)) {
+          cells[pacmanPosition].classList.remove(pacmanUp)
+        } else if (cells[pacmanPosition].classList.contains(pacmanDown)) {
+          cells[pacmanPosition].classList.remove(pacmanDown)
+        }
+        pacmanUp = 'pacman-looking-up'
+        pacmanDown = 'pacman-looking-down'
+        pacmanLeft = 'pacman-looking-left'
+        pacmanRight = 'pacman-looking-right'
+        cells[pacmanPosition].classList.add(pacmanUp)
+      }, 15000)
+    }
+  })
 }
 
 window.addEventListener('DOMContentLoaded', main)

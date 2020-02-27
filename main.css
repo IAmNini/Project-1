@@ -61,30 +61,6 @@ main {
   background-position: center;
 }
 
-.pacman-looking-right {
-  background-image: url(images/astronaut-looking-right.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.pacman-looking-left {
-  background-image: url(images/astronaut-looking-left.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.pacman-looking-up {
-  background-image: url(images/astronaut-looking-up.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.pacman-looking-down {
-  background-image: url(images/astronaut-looking-down.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
 .wall {
   background-image: url(images/asteroid.png);
   background-size: contain;
@@ -131,6 +107,34 @@ main {
   /* background-color: rgb(167, 118, 55); */
 }
 
+.pacman-looking-right {
+  background-image: url(images/astronaut-looking-right.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.pacman-looking-left {
+  background-image: url(images/astronaut-looking-left.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.pacman-looking-up {
+  background-image: url(images/astronaut-looking-up.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.pacman-looking-down {
+  background-image: url(images/astronaut-looking-down.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .letter {
   width: 70px;
   height: auto;
@@ -158,4 +162,49 @@ main {
   background-size: cover;
   height: 620px;
   width: 620px;
+}
+
+.rocket-looking-up {
+  background-image: url(images/rocket-looking-up.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.rocket-looking-right {
+  background-image: url(images/rocket-looking-right.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.rocket-looking-down {
+  background-image: url(images/rocket-looking-down.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.rocket-looking-left {
+  background-image: url(images/rocket-looking-left.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.hurt {
+  animation: flash 0.5s infinite;
+}
+
+@keyframes flash {
+ from,
+ 50%,
+ to {
+   opacity: 1;
+ }
+
+ 25%,
+ 75% {
+   opacity: 0;
+ }
 }
