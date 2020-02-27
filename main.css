@@ -41,7 +41,7 @@ main {
   display: flex;
   flex-direction: row;
   background-color: black;
-  border: 10px solid black;
+  border: 10px solid rgb(77, 36, 77);
   border-radius: 15px;
   width: 620px;
   height: 620px;
@@ -138,4 +138,24 @@ main {
 
 .star-wars-intro {
   display: none;
+}
+
+.careful-start {
+  text-align: center;
+  margin: 200px 20px 0 20px;
+  font-size: 30px;
+}
+
+.success-screen {
+  background-image: url(images/success.png);
+  background-size: cover;
+  height: 620px;
+  width: 620px;
+}
+
+.game-over-screen {
+  background-image: url(images/game-over.jpg);
+  background-size: cover;
+  height: 620px;
+  width: 620px;
 }

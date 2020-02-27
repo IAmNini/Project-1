@@ -37,6 +37,10 @@ function main() {
   const storyButton = document.querySelector('.story')
   const main = document.querySelector('main')
   const starWarsIntro = document.querySelector('.star-wars-intro')
+  const carefulStart = document.querySelector('.careful-start')
+  const gridContainer = document.querySelector('.grid-container')
+
+  // STORY
 
   storyButton.addEventListener('click', () => {
     main.style.display = 'none'
@@ -47,7 +51,11 @@ function main() {
     }, 32000)
   })
 
+  // GAME
+
   startButton.addEventListener('click', () => {
+
+    carefulStart.style.display = 'none'
 
     // INITIAL SET UP LOOP
 
@@ -117,10 +125,7 @@ function main() {
 
     document.addEventListener('keydown', (event) => {
       if (event.key === 'ArrowRight') {
-        console.log(pacmanPosition)
-        console.log(cells[pacmanPosition + 1])
         if (pacmanPosition === cells.length - 1 || cells[pacmanPosition + 1].classList.contains('wall')) {
-          console.log('hello')
           return
         }
         if (cells[pacmanPosition].classList.contains('pacman-looking-right')) {
@@ -135,10 +140,7 @@ function main() {
         pacmanPosition += 1
         cells[pacmanPosition].classList.add('pacman-looking-right')
       } else if (event.key === 'ArrowLeft') {
-        console.log(pacmanPosition)
-        console.log(cells[pacmanPosition - 1])
         if (pacmanPosition === 0 || cells[pacmanPosition - 1].classList.contains('wall')) {
-          console.log('hello')
           return
         }
         if (cells[pacmanPosition].classList.contains('pacman-looking-right')) {
@@ -153,10 +155,7 @@ function main() {
         pacmanPosition -= 1
         cells[pacmanPosition].classList.add('pacman-looking-left')
       } else if (event.key === 'ArrowUp') {
-        console.log(pacmanPosition)
-        console.log(cells[pacmanPosition - côté])
         if (cells[pacmanPosition - côté].classList.contains('wall')) {
-          console.log('hello')
           return
         }
         if (cells[pacmanPosition].classList.contains('pacman-looking-right')) {
@@ -171,10 +170,7 @@ function main() {
         pacmanPosition -= côté
         cells[pacmanPosition].classList.add('pacman-looking-up')
       } else if (event.key === 'ArrowDown') {
-        console.log(pacmanPosition)
-        console.log(cells[pacmanPosition + côté])
         if (cells[pacmanPosition + côté].classList.contains('wall')) {
-          console.log('hello')
           return
         }
         if (cells[pacmanPosition].classList.contains('pacman-looking-right')) {
@@ -201,7 +197,8 @@ function main() {
           applesEatenDisplay.innerHTML = applesEaten
           applesRemaining = 0
           applesRemainingDisplay.innerHTML = applesRemaining
-          alert('You win!')
+          grid.style.display = 'none'
+          gridContainer.classList.add('success-screen')
         }
       }
     })
@@ -324,7 +321,8 @@ function main() {
             lives--
             livesDisplay.innerHTML = lives
             if (lives === 0) {
-              alert('GAME OVER')
+              grid.style.display = 'none'
+              gridContainer.classList.add('game-over-screen')
             }
             cells[parseInt(vegetable1Position)].classList.remove('vegetable')
             vegetable1Position = 166
@@ -425,7 +423,8 @@ function main() {
             lives--
             livesDisplay.innerHTML = lives
             if (lives === 0) {
-              alert('GAME OVER')
+              grid.style.display = 'none'
+              gridContainer.classList.add('game-over-screen')
             }
             cells[parseInt(vegetable2Position)].classList.remove('vegetable')
             vegetable2Position = 111
@@ -526,7 +525,8 @@ function main() {
             lives--
             livesDisplay.innerHTML = lives
             if (lives === 0) {
-              alert('GAME OVER')
+              grid.style.display = 'none'
+              gridContainer.classList.add('game-over-screen')
             }
             cells[parseInt(vegetable3Position)].classList.remove('vegetable')
             vegetable3Position = 185
@@ -627,7 +627,8 @@ function main() {
             lives--
             livesDisplay.innerHTML = lives
             if (lives === 0) {
-              alert('GAME OVER')
+              grid.style.display = 'none'
+              gridContainer.classList.add('game-over-screen')
             }
             cells[parseInt(vegetable4Position)].classList.remove('vegetable')
             vegetable4Position = 489
@@ -728,7 +729,8 @@ function main() {
             lives--
             livesDisplay.innerHTML = lives
             if (lives === 0) {
-              alert('GAME OVER')
+              grid.style.display = 'none'
+              gridContainer.classList.add('game-over-screen')
             }
             cells[parseInt(vegetable5Position)].classList.remove('vegetable')
             vegetable5Position = 185
@@ -829,7 +831,8 @@ function main() {
             lives--
             livesDisplay.innerHTML = lives
             if (lives === 0) {
-              alert('GAME OVER')
+              grid.style.display = 'none'
+              gridContainer.classList.add('game-over-screen')
             }
             cells[parseInt(vegetable6Position)].classList.remove('vegetable')
             vegetable6Position = 473
@@ -930,7 +933,8 @@ function main() {
             lives--
             livesDisplay.innerHTML = lives
             if (lives === 0) {
-              alert('GAME OVER')
+              grid.style.display = 'none'
+              gridContainer.classList.add('game-over-screen')
             }
             cells[parseInt(vegetable7Position)].classList.remove('vegetable')
             vegetable7Position = 838
@@ -1031,7 +1035,8 @@ function main() {
             lives--
             livesDisplay.innerHTML = lives
             if (lives === 0) {
-              alert('GAME OVER')
+              grid.style.display = 'none'
+              gridContainer.classList.add('game-over-screen')
             }
             cells[parseInt(vegetable8Position)].classList.remove('vegetable')
             vegetable8Position = 912
@@ -1132,7 +1137,8 @@ function main() {
             lives--
             livesDisplay.innerHTML = lives
             if (lives === 0) {
-              alert('GAME OVER')
+              grid.style.display = 'none'
+              gridContainer.classList.add('game-over-screen')
             }
             cells[parseInt(vegetable9Position)].classList.remove('vegetable')
             vegetable9Position = 857
