@@ -43,6 +43,7 @@ function main() {
   let pacmanDown = 'pacman-looking-down'
   let pacmanLeft = 'pacman-looking-left'
   let pacmanRight = 'pacman-looking-right'
+  const audio = document.querySelector('#audio')
 
   // STORY
 
@@ -50,9 +51,14 @@ function main() {
     main.style.display = 'none'
     starWarsIntro.style.display = 'block'
     setTimeout(() => {
+      audio.src = 'sounds/Star-Wars-Theme.mp3'
+      audio.play()
+    }, 2000)
+    setTimeout(() => {
       starWarsIntro.style.display = 'none'
       main.style.display = 'flex'
-    }, 32000)
+      audio.pause()
+    }, 47000)
   })
 
   // GAME
@@ -94,7 +100,7 @@ function main() {
         path.push(i)
       }
     }
-    const rocketPosition = path[Math.floor(Math.random() * path.length)]
+    let rocketPosition = path[Math.floor(Math.random() * path.length)]
     cells[rocketPosition].classList.add('rocket-looking-up')
 
     // TERRITORY CLASSES LOOPS
@@ -290,10 +296,17 @@ function main() {
     function veggie1GoesRandom() {
       const randomInterval1 = setInterval(() => {
         for (let i = 0; i < cells.length; i++) {
-          if (cells[i].classList.contains('vege1terri') && (cells[i].classList.contains('pacman-looking-up') || cells[i].classList.contains(pacmanDown) || cells[i].classList.contains(pacmanLeft) || cells[i].classList.contains(pacmanRight))) {
+          if (cells[i].classList.contains('vege1terri') && (cells[i].classList.contains(pacmanUp) || cells[i].classList.contains(pacmanDown) || cells[i].classList.contains(pacmanLeft) || cells[i].classList.contains(pacmanRight))) {
             clearInterval(randomInterval1)
             veggie1Chase()
           }
+        }
+        if (pacmanUp === 'rocket-looking-up' && pacmanPosition === vegetable1Position) {
+          cells[vegetable1Position].classList.remove('vegetable')
+          setTimeout(() => {
+            vegetable1Position = 166
+            cells[vegetable1Position].classList.add('vegetable')
+          }, 5000)
         }
         const randomDirection = Math.floor(Math.random() * arrayOfDirections.length)
         if (randomDirection === 0) {
@@ -335,19 +348,13 @@ function main() {
         if (vegetable1Territory.includes(pacmanPosition)) {
           if (pacmanUp === 'rocket-looking-up') {
             clearInterval(chaseInterval1)
-            if (pacmanPosition === vegetable1Position) {
-              cells[vegetable1Position].classList.remove('vegetable')
-              setTimeout(() => {
-                vegetable1Position = 166
-                cells[vegetable1Position].classList.add('vegetable')
-              }, 5000)
-            }
+            veggie1GoesRandom()
           }
           if (pacmanPosition === vegetable1Position) {
             // cells[pacmanPosition].classList.add('hurt')
             lives--
             livesDisplay.innerHTML = lives
-            if (lives === 0) {
+            if (lives <= 0) {
               grid.style.display = 'none'
               gridContainer.classList.add('game-over-screen')
               clearInterval(chaseInterval1)
@@ -408,6 +415,13 @@ function main() {
             veggie2Chase()
           }
         }
+        if (pacmanUp === 'rocket-looking-up' && pacmanPosition === vegetable2Position) {
+          cells[vegetable2Position].classList.remove('vegetable')
+          setTimeout(() => {
+            vegetable2Position = 111
+            cells[vegetable2Position].classList.add('vegetable')
+          }, 5000)
+        }
         const randomDirection = Math.floor(Math.random() * arrayOfDirections.length)
         if (randomDirection === 0) {
           if (!cells[vegetable2Position + 1].classList.contains('vege2terri')) {
@@ -448,18 +462,12 @@ function main() {
         if (vegetable2Territory.includes(pacmanPosition)) {
           if (pacmanUp === 'rocket-looking-up') {
             clearInterval(chaseInterval2)
-            if (pacmanPosition === vegetable2Position) {
-              cells[vegetable2Position].classList.remove('vegetable')
-              setTimeout(() => {
-                vegetable2Position = 111
-                cells[vegetable2Position].classList.add('vegetable')
-              }, 5000)
-            }
+            veggie2GoesRandom()
           }
           if (pacmanPosition === vegetable2Position) {
             lives--
             livesDisplay.innerHTML = lives
-            if (lives === 0) {
+            if (lives <= 0) {
               grid.style.display = 'none'
               gridContainer.classList.add('game-over-screen')
               clearInterval(chaseInterval2)
@@ -520,6 +528,13 @@ function main() {
             veggie3Chase()
           }
         }
+        if (pacmanUp === 'rocket-looking-up' && pacmanPosition === vegetable3Position) {
+          cells[vegetable3Position].classList.remove('vegetable')
+          setTimeout(() => {
+            vegetable3Position = 185
+            cells[vegetable3Position].classList.add('vegetable')
+          }, 5000)
+        }
         const randomDirection = Math.floor(Math.random() * arrayOfDirections.length)
         if (randomDirection === 0) {
           if (!cells[vegetable3Position + 1].classList.contains('vege3terri')) {
@@ -560,18 +575,12 @@ function main() {
         if (vegetable3Territory.includes(pacmanPosition)) {
           if (pacmanUp === 'rocket-looking-up') {
             clearInterval(chaseInterval3)
-            if (pacmanPosition === vegetable3Position) {
-              cells[vegetable3Position].classList.remove('vegetable')
-              setTimeout(() => {
-                vegetable3Position = 185
-                cells[vegetable3Position].classList.add('vegetable')
-              }, 5000)
-            }
+            veggie3GoesRandom()
           }
           if (pacmanPosition === vegetable3Position) {
             lives--
             livesDisplay.innerHTML = lives
-            if (lives === 0) {
+            if (lives <= 0) {
               grid.style.display = 'none'
               gridContainer.classList.add('game-over-screen')
               clearInterval(chaseInterval3)
@@ -594,7 +603,7 @@ function main() {
             cells[parseInt(vegetable3Position)].classList.remove('vegetable')
             if (vegetable3Territory.includes(vegetable3Position + 1) && (vegetable3Position + 1 === pacmanPosition || vegetable3Position + 2 === pacmanPosition || vegetable3Position + 3 === pacmanPosition || vegetable3Position + 4 === pacmanPosition || vegetable3Position + 5 === pacmanPosition)) {
               vegetable3Position++
-            } else if (vegetable3Territory.includes(vegetable3Position + 1) && vegetable3Territory.includes(vegetable3Position + 2) && vegetable3Territory.includes(vegetable3Position + 3) && vegetable3Territory.includes(vegetable3Position + 4) && vegetable3Territory.includes(vegetable3Position + 5)) {
+            } else if (vegetable3Territory.includes(vegetable3Position + 1) && vegetable3Territory.includes(vegetable3Position + 2) && vegetable3Territory.includes(vegetable3Position + 3) && vegetable3Territory.includes(vegetable3Position + 4) && vegetable3Territory.includes(vegetable3Position + 5) && vegetable3Territory.includes(vegetable3Position + 6)) {
               vegetable3Position++
             } else if (vegetable3Territory.includes(vegetable3Position + 32)) {
               vegetable3Position = vegetable3Position + 32
@@ -606,7 +615,7 @@ function main() {
             cells[parseInt(vegetable3Position)].classList.remove('vegetable')
             if (vegetable3Territory.includes(vegetable3Position - 1) && (vegetable3Position - 1 === pacmanPosition || vegetable3Position - 2 === pacmanPosition || vegetable3Position - 3 === pacmanPosition || vegetable3Position - 4 === pacmanPosition || vegetable3Position - 5 === pacmanPosition)) {
               vegetable3Position--
-            } else if (vegetable3Territory.includes(vegetable3Position - 1) && vegetable3Territory.includes(vegetable3Position - 2) && vegetable3Territory.includes(vegetable3Position - 3) && vegetable3Territory.includes(vegetable3Position - 4) && vegetable3Territory.includes(vegetable3Position - 5) && vegetable3Territory.includes(vegetable3Position - 6)) {
+            } else if (vegetable3Territory.includes(vegetable3Position - 1) && vegetable3Territory.includes(vegetable3Position - 2) && vegetable3Territory.includes(vegetable3Position - 3) && vegetable3Territory.includes(vegetable3Position - 4) && vegetable3Territory.includes(vegetable3Position - 5)) {
               vegetable3Position--
             } else if (vegetable3Territory.includes(vegetable3Position - 32)) {
               vegetable3Position = vegetable3Position - 32
@@ -631,6 +640,13 @@ function main() {
             clearInterval(randomInterval4)
             veggie4Chase()
           }
+        }
+        if (pacmanUp === 'rocket-looking-up' && pacmanPosition === vegetable4Position) {
+          cells[vegetable4Position].classList.remove('vegetable')
+          setTimeout(() => {
+            vegetable4Position = 489
+            cells[vegetable4Position].classList.add('vegetable')
+          }, 5000)
         }
         const randomDirection = Math.floor(Math.random() * arrayOfDirections.length)
         if (randomDirection === 0) {
@@ -672,18 +688,12 @@ function main() {
         if (vegetable4Territory.includes(pacmanPosition)) {
           if (pacmanUp === 'rocket-looking-up') {
             clearInterval(chaseInterval4)
-            if (pacmanPosition === vegetable4Position) {
-              cells[vegetable4Position].classList.remove('vegetable')
-              setTimeout(() => {
-                vegetable4Position = 489
-                cells[vegetable4Position].classList.add('vegetable')
-              }, 5000)
-            }
+            veggie4GoesRandom()
           }
           if (pacmanPosition === vegetable4Position) {
             lives--
             livesDisplay.innerHTML = lives
-            if (lives === 0) {
+            if (lives <= 0) {
               grid.style.display = 'none'
               gridContainer.classList.add('game-over-screen')
               clearInterval(chaseInterval4)
@@ -744,6 +754,13 @@ function main() {
             veggie5Chase()
           }
         }
+        if (pacmanUp === 'rocket-looking-up' && pacmanPosition === vegetable5Position) {
+          cells[vegetable5Position].classList.remove('vegetable')
+          setTimeout(() => {
+            vegetable5Position = 363
+            cells[vegetable5Position].classList.add('vegetable')
+          }, 5000)
+        }
         const randomDirection = Math.floor(Math.random() * arrayOfDirections.length)
         if (randomDirection === 0) {
           if (!cells[vegetable5Position + 1].classList.contains('vege5terri')) {
@@ -784,18 +801,12 @@ function main() {
         if (vegetable5Territory.includes(pacmanPosition)) {
           if (pacmanUp === 'rocket-looking-up') {
             clearInterval(chaseInterval5)
-            if (pacmanPosition === vegetable5Position) {
-              cells[vegetable5Position].classList.remove('vegetable')
-              setTimeout(() => {
-                vegetable5Position = 363
-                cells[vegetable5Position].classList.add('vegetable')
-              }, 5000)
-            }
+            veggie5GoesRandom()
           }
           if (pacmanPosition === vegetable5Position) {
             lives--
             livesDisplay.innerHTML = lives
-            if (lives === 0) {
+            if (lives <= 0) {
               grid.style.display = 'none'
               gridContainer.classList.add('game-over-screen')
               clearInterval(chaseInterval5)
@@ -856,6 +867,13 @@ function main() {
             veggie6Chase()
           }
         }
+        if (pacmanUp === 'rocket-looking-up' && pacmanPosition === vegetable6Position) {
+          cells[vegetable6Position].classList.remove('vegetable')
+          setTimeout(() => {
+            vegetable6Position = 473
+            cells[vegetable6Position].classList.add('vegetable')
+          }, 5000)
+        }
         const randomDirection = Math.floor(Math.random() * arrayOfDirections.length)
         if (randomDirection === 0) {
           if (!cells[vegetable6Position + 1].classList.contains('vege6terri')) {
@@ -896,18 +914,12 @@ function main() {
         if (vegetable6Territory.includes(pacmanPosition)) {
           if (pacmanUp === 'rocket-looking-up') {
             clearInterval(chaseInterval6)
-            if (pacmanPosition === vegetable6Position) {
-              cells[vegetable6Position].classList.remove('vegetable')
-              setTimeout(() => {
-                vegetable6Position = 473
-                cells[vegetable6Position].classList.add('vegetable')
-              }, 5000)
-            }
+            veggie6GoesRandom()
           }
           if (pacmanPosition === vegetable6Position) {
             lives--
             livesDisplay.innerHTML = lives
-            if (lives === 0) {
+            if (lives <= 0) {
               grid.style.display = 'none'
               gridContainer.classList.add('game-over-screen')
               clearInterval(chaseInterval6)
@@ -968,6 +980,13 @@ function main() {
             veggie7Chase()
           }
         }
+        if (pacmanUp === 'rocket-looking-up' && pacmanPosition === vegetable7Position) {
+          cells[vegetable7Position].classList.remove('vegetable')
+          setTimeout(() => {
+            vegetable7Position = 838
+            cells[vegetable7Position].classList.add('vegetable')
+          }, 5000)
+        }
         const randomDirection = Math.floor(Math.random() * arrayOfDirections.length)
         if (randomDirection === 0) {
           if (!cells[vegetable7Position + 1].classList.contains('vege7terri')) {
@@ -1008,18 +1027,12 @@ function main() {
         if (vegetable7Territory.includes(pacmanPosition)) {
           if (pacmanUp === 'rocket-looking-up') {
             clearInterval(chaseInterval7)
-            if (pacmanPosition === vegetable7Position) {
-              cells[vegetable7Position].classList.remove('vegetable')
-              setTimeout(() => {
-                vegetable7Position = 838
-                cells[vegetable7Position].classList.add('vegetable')
-              }, 5000)
-            }
+            veggie7GoesRandom()
           }
           if (pacmanPosition === vegetable7Position) {
             lives--
             livesDisplay.innerHTML = lives
-            if (lives === 0) {
+            if (lives <= 0) {
               grid.style.display = 'none'
               gridContainer.classList.add('game-over-screen')
               clearInterval(chaseInterval7)
@@ -1080,6 +1093,13 @@ function main() {
             veggie8Chase()
           }
         }
+        if (pacmanUp === 'rocket-looking-up' && pacmanPosition === vegetable8Position) {
+          cells[vegetable8Position].classList.remove('vegetable')
+          setTimeout(() => {
+            vegetable8Position = 912
+            cells[vegetable8Position].classList.add('vegetable')
+          }, 5000)
+        }
         const randomDirection = Math.floor(Math.random() * arrayOfDirections.length)
         if (randomDirection === 0) {
           if (!cells[vegetable8Position + 1].classList.contains('vege8terri')) {
@@ -1120,18 +1140,12 @@ function main() {
         if (vegetable8Territory.includes(pacmanPosition)) {
           if (pacmanUp === 'rocket-looking-up') {
             clearInterval(chaseInterval8)
-            if (pacmanPosition === vegetable8Position) {
-              cells[vegetable8Position].classList.remove('vegetable')
-              setTimeout(() => {
-                vegetable8Position = 912
-                cells[vegetable8Position].classList.add('vegetable')
-              }, 5000)
-            }
+            veggie8GoesRandom()
           }
           if (pacmanPosition === vegetable8Position) {
             lives--
             livesDisplay.innerHTML = lives
-            if (lives === 0) {
+            if (lives <= 0) {
               grid.style.display = 'none'
               gridContainer.classList.add('game-over-screen')
               clearInterval(chaseInterval8)
@@ -1192,6 +1206,13 @@ function main() {
             veggie9Chase()
           }
         }
+        if (pacmanUp === 'rocket-looking-up' && pacmanPosition === vegetable9Position) {
+          cells[vegetable9Position].classList.remove('vegetable')
+          setTimeout(() => {
+            vegetable9Position = 857
+            cells[vegetable9Position].classList.add('vegetable')
+          }, 5000)
+        }
         const randomDirection = Math.floor(Math.random() * arrayOfDirections.length)
         if (randomDirection === 0) {
           if (!cells[vegetable9Position + 1].classList.contains('vege9terri')) {
@@ -1232,18 +1253,12 @@ function main() {
         if (vegetable9Territory.includes(pacmanPosition)) {
           if (pacmanUp === 'rocket-looking-up') {
             clearInterval(chaseInterval9)
-            if (pacmanPosition === vegetable9Position) {
-              cells[vegetable9Position].classList.remove('vegetable')
-              setTimeout(() => {
-                vegetable9Position = 857
-                cells[vegetable9Position].classList.add('vegetable')
-              }, 5000)
-            }
+            veggie9GoesRandom()
           }
           if (pacmanPosition === vegetable9Position) {
             lives--
             livesDisplay.innerHTML = lives
-            if (lives === 0) {
+            if (lives <= 0) {
               grid.style.display = 'none'
               gridContainer.classList.add('game-over-screen')
               clearInterval(chaseInterval9)
@@ -1266,7 +1281,7 @@ function main() {
             cells[parseInt(vegetable9Position)].classList.remove('vegetable')
             if (vegetable9Territory.includes(vegetable9Position + 1) && (vegetable9Position + 1 === pacmanPosition || vegetable9Position + 2 === pacmanPosition || vegetable9Position + 3 === pacmanPosition || vegetable9Position + 4 === pacmanPosition || vegetable9Position + 5 === pacmanPosition)) {
               vegetable9Position++
-            } else if (vegetable9Territory.includes(vegetable9Position + 1) && vegetable9Territory.includes(vegetable9Position + 2) && vegetable9Territory.includes(vegetable9Position + 3) && vegetable9Territory.includes(vegetable9Position + 4) && vegetable9Territory.includes(vegetable9Position + 5)) {
+            } else if (vegetable9Territory.includes(vegetable9Position + 1) && vegetable9Territory.includes(vegetable9Position + 2) && vegetable9Territory.includes(vegetable9Position + 3) && vegetable9Territory.includes(vegetable9Position + 4) && vegetable9Territory.includes(vegetable9Position + 5) && vegetable9Territory.includes(vegetable9Position + 6)) {
               vegetable9Position++
             } else if (vegetable9Territory.includes(vegetable9Position + 32)) {
               vegetable9Position = vegetable9Position + 32
@@ -1278,7 +1293,7 @@ function main() {
             cells[parseInt(vegetable9Position)].classList.remove('vegetable')
             if (vegetable9Territory.includes(vegetable9Position - 1) && (vegetable9Position - 1 === pacmanPosition || vegetable9Position - 2 === pacmanPosition || vegetable9Position - 3 === pacmanPosition || vegetable9Position - 4 === pacmanPosition || vegetable9Position - 5 === pacmanPosition)) {
               vegetable9Position--
-            } else if (vegetable9Territory.includes(vegetable9Position - 1) && vegetable9Territory.includes(vegetable9Position - 2) && vegetable9Territory.includes(vegetable9Position - 3) && vegetable9Territory.includes(vegetable9Position - 4) && vegetable9Territory.includes(vegetable9Position - 5) && vegetable9Territory.includes(vegetable9Position - 6)) {
+            } else if (vegetable9Territory.includes(vegetable9Position - 1) && vegetable9Territory.includes(vegetable9Position - 2) && vegetable9Territory.includes(vegetable9Position - 3) && vegetable9Territory.includes(vegetable9Position - 4) && vegetable9Territory.includes(vegetable9Position - 5)) {
               vegetable9Position--
             } else if (vegetable9Territory.includes(vegetable9Position - 32)) {
               vegetable9Position = vegetable9Position - 32
@@ -1311,6 +1326,8 @@ function main() {
       pacmanDown = 'rocket-looking-down'
       pacmanLeft = 'rocket-looking-left'
       pacmanRight = 'rocket-looking-right'
+
+      rocketPosition = NaN
 
       setTimeout(() => {
         if (cells[pacmanPosition].classList.contains(pacmanRight)) {
