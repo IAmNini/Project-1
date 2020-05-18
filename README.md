@@ -5,6 +5,8 @@
 
 sPACe MAN is my first solo project at GA London, and my first ever project that I built fully from planning to deployment. Our assigment was to create a game in vanilla JavaScript. I decided to build a game of Pac-Man, similar to the original, but with a few personal changes. Similarly to the original game's ghosts and fruits, in my version, pacman is an astronaut who must navigate through the asteroids to collect all of the crystals without getting caught by the UFO's.
 
+<img src="images/Screen Shot 2020-05-13 at 10.36.43.png">
+
 You can play the game [here](https://iamnini.github.io/project-1/).
 
 
