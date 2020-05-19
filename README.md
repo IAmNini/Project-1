@@ -17,7 +17,7 @@ You can play the game [here](https://iamnini.github.io/project-1/).
 - **Include separate HTML / CSS / JavaScript files**
 - Stick with **KISS (Keep It Simple Stupid)** and **DRY (Don't Repeat Yourself)** principles
 - Use **Javascript** for **DOM manipulation**
-- **Deploy your game online**, where the rest of the world can access it
+- **Deploy the game online**, where the rest of the world can access it
 - Use **semantic markup** for HTML and CSS (adhere to best practices)
 
 
@@ -31,7 +31,7 @@ You can play the game [here](https://iamnini.github.io/project-1/).
 
 ## The Approach
 
-My game was initially supposed to be about pacman escaping from vegetables and eating apples. I later changed the concept of the game to a space theme, where pacman is an astronaut and runs away from UFO's while collecting crystals. I only decided to change the theme of the game towards the end of developing it, so most of the variable and class names refer to the origianl setting. I hope this isn't too confusing.
+My game was initially supposed to be about pacman escaping from vegetables and eating apples. I later changed the concept of the game to a space theme, where pacman is an astronaut and runs away from UFO's while collecting crystals. I only decided to change the theme of the game towards the end of developing it, so most of the variable and class names refer to the original setting. I hope this isn't too confusing.
 
 ### The Grid
 
@@ -282,21 +282,21 @@ function rocketTime() {
 
 - As I described in the ReadMe, there are still quite a few features that need improving or fixing. I particularly struggled with the chasing functions and kept wondering if there was a cleaner and more organised way of doing it.
 
-- In general I am certain my code could be refactored because I had the same (or very similar) functions 9 times and lots and lots of repetitions. This is an issue I struggle with as I am scared to refactor my code in fear that it will break. I would like to try to refactor my code more in all of my projects.
+- In general, I am certain my code could be refactored because I had the same (or very similar) functions 9 times and lots and lots of repetitions. This is an issue I struggle with as I am scared to refactor my code in fear that it will break. I would like to try to refactor my code more in all of my projects.
 
 
 ## Victories
 
-- Overall I am very happy with the result. My game is fun to play and I am very pleased with the level of difficulty (challenging but winnable).
+- Overall, I am very happy with the result. My game is fun to play and I am very pleased with the level of difficulty (challenging but winnable).
 
 - I don't usually consider myself a very good designer but I like the look of my game and the animations.
 
-- It was very fun to add the Star Wars themed 'story background' as a fun bonus.
+- It was very fun to add the Star Wars-themed 'story background' as a fun bonus.
 
 - I had a lot of fun building this game and definitely would love to do more detailed logic in JavaScript or Python. I also really enjoy building games and would like to do more of that.
 
 
-## Potential future features
+## Potential Future Features
 
 - Definitely fixing all of the imperfect features and bugs.
 
